@@ -39,7 +39,11 @@ function viaTsConfig(index: RepoIndex, from: string, spec: string): string | nul
       } else {
         const head = pattern.slice(0, star);
         const tail = pattern.slice(star + 1);
-        if (spec.length >= head.length + tail.length && spec.startsWith(head) && spec.endsWith(tail)) {
+        if (
+          spec.length >= head.length + tail.length &&
+          spec.startsWith(head) &&
+          spec.endsWith(tail)
+        ) {
           captured = spec.slice(head.length, spec.length - tail.length);
         }
       }
@@ -60,7 +64,11 @@ function viaTsConfig(index: RepoIndex, from: string, spec: string): string | nul
 function viaWorkspace(index: RepoIndex, spec: string): string | null {
   for (const { name, dir } of index.packages) {
     if (spec === name) {
-      return tryFile(index, `${dir}/src/index`) ?? tryFile(index, `${dir}/index`) ?? tryFile(index, `${dir}/src/main`);
+      return (
+        tryFile(index, `${dir}/src/index`) ??
+        tryFile(index, `${dir}/index`) ??
+        tryFile(index, `${dir}/src/main`)
+      );
     }
     if (spec.startsWith(name + '/')) {
       const rest = spec.slice(name.length + 1);

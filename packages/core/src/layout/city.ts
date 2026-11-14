@@ -94,7 +94,15 @@ export function layoutCity(paths: readonly string[], options: LayoutOptions = {}
 
   const place = (dir: Dir, x: number, y: number, w: number, h: number): void => {
     if (dir.depth > 0) {
-      districts.push({ path: dir.path, depth: dir.depth, x: x + w / 2, z: y + h / 2, w, d: h, files: dir.count });
+      districts.push({
+        path: dir.path,
+        depth: dir.depth,
+        x: x + w / 2,
+        z: y + h / 2,
+        w,
+        d: h,
+        files: dir.count,
+      });
       const pad = Math.min(padding, w * 0.2, h * 0.2);
       x += pad;
       y += pad;

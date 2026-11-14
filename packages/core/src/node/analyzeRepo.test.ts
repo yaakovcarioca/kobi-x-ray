@@ -31,7 +31,10 @@ beforeAll(async () => {
   git('add', '.');
   git('commit', '-q', '-m', 'init');
 
-  write('src/util.ts', 'export const add = (a: number, b: number) => {\n  if (a < 0) return b;\n  return a + b;\n};\n');
+  write(
+    'src/util.ts',
+    'export const add = (a: number, b: number) => {\n  if (a < 0) return b;\n  return a + b;\n};\n',
+  );
   git('commit', '-q', '-am', 'fix: negative numbers');
 
   write('src/untracked.ts', "import 'left-pad';\nimport './util';\n");
@@ -55,7 +58,9 @@ describe('analyzeRepo', () => {
   it('builds the dependency graph in both directions', () => {
     const util = byPath('src/util.ts');
     expect(byPath('src/index.ts').imports).toEqual([util.id]);
-    expect(util.importedBy.sort()).toEqual([byPath('src/index.ts').id, byPath('src/untracked.ts').id].sort());
+    expect(util.importedBy.sort()).toEqual(
+      [byPath('src/index.ts').id, byPath('src/untracked.ts').id].sort(),
+    );
     expect(byPath('src/untracked.ts').external).toEqual(['left-pad']);
   });
 

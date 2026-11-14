@@ -66,7 +66,13 @@ describe('javascript resolution', () => {
 
 describe('python resolution', () => {
   const index = buildRepoIndex(
-    ['app/__init__.py', 'app/main.py', 'app/models/__init__.py', 'app/models/user.py', 'tools/json.py'],
+    [
+      'app/__init__.py',
+      'app/main.py',
+      'app/models/__init__.py',
+      'app/models/user.py',
+      'tools/json.py',
+    ],
     new Map(),
   );
   const resolve = (ref: { spec: string; level?: number; names?: string[] }, from = 'app/main.py') =>
@@ -78,7 +84,9 @@ describe('python resolution', () => {
   });
 
   it('treats from-import names as submodules when they exist', () => {
-    expect(resolve({ spec: 'app.models', names: ['user'] }).internal).toEqual(['app/models/user.py']);
+    expect(resolve({ spec: 'app.models', names: ['user'] }).internal).toEqual([
+      'app/models/user.py',
+    ]);
     expect(resolve({ spec: 'app.models', names: ['Base'] }).internal).toEqual([
       'app/models/__init__.py',
     ]);
@@ -88,7 +96,9 @@ describe('python resolution', () => {
     expect(resolve({ spec: '', level: 1, names: ['models'] }).internal).toEqual([
       'app/models/__init__.py',
     ]);
-    expect(resolve({ spec: 'main', level: 2 }, 'app/models/user.py').internal).toEqual(['app/main.py']);
+    expect(resolve({ spec: 'main', level: 2 }, 'app/models/user.py').internal).toEqual([
+      'app/main.py',
+    ]);
   });
 
   it('does not confuse stdlib modules with unrelated local files', () => {
@@ -98,23 +108,41 @@ describe('python resolution', () => {
 
 describe('go resolution', () => {
   const index = buildRepoIndex(
-    ['go.mod', 'main.go', 'internal/store/store.go', 'internal/store/cache.go', 'internal/store/store_test.go'],
+    [
+      'go.mod',
+      'main.go',
+      'internal/store/store.go',
+      'internal/store/cache.go',
+      'internal/store/store_test.go',
+    ],
     new Map([['go.mod', 'module example.com/app\n\ngo 1.22\n']]),
   );
 
   it('fans out to the files of the imported package', () => {
-    const result = resolveImport(index, 'main.go', 'go', { spec: 'example.com/app/internal/store' });
+    const result = resolveImport(index, 'main.go', 'go', {
+      spec: 'example.com/app/internal/store',
+    });
     expect(result.internal).toEqual(['internal/store/store.go', 'internal/store/cache.go']);
   });
 
   it('keeps other imports external', () => {
-    expect(resolveImport(index, 'main.go', 'go', { spec: 'fmt' })).toEqual({ internal: [], external: 'fmt' });
+    expect(resolveImport(index, 'main.go', 'go', { spec: 'fmt' })).toEqual({
+      internal: [],
+      external: 'fmt',
+    });
   });
 });
 
 describe('rust resolution', () => {
   const index = buildRepoIndex(
-    ['Cargo.toml', 'src/main.rs', 'src/parser.rs', 'src/parser/lexer.rs', 'src/ast/mod.rs', 'src/ast/node.rs'],
+    [
+      'Cargo.toml',
+      'src/main.rs',
+      'src/parser.rs',
+      'src/parser/lexer.rs',
+      'src/ast/mod.rs',
+      'src/ast/node.rs',
+    ],
     new Map([['Cargo.toml', '[package]\nname = "my-app"\n']]),
   );
   const resolve = (spec: string, from: string, mod = false) =>

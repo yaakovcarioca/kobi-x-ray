@@ -13,12 +13,21 @@ export function git(cwd: string, args: string[]): Promise<string> {
     child.on('error', reject);
     child.on('close', (code) => {
       if (code === 0) resolve(Buffer.concat(out).toString('utf8'));
-      else reject(new Error(`git ${args[0]} failed (${code}): ${Buffer.concat(err).toString('utf8').trim()}`));
+      else
+        reject(
+          new Error(
+            `git ${args[0]} failed (${code}): ${Buffer.concat(err).toString('utf8').trim()}`,
+          ),
+        );
     });
   });
 }
 
-const tryGit = (cwd: string, args: string[]) => git(cwd, args).then((out) => out.trim(), () => null);
+const tryGit = (cwd: string, args: string[]) =>
+  git(cwd, args).then(
+    (out) => out.trim(),
+    () => null,
+  );
 
 export async function isGitRepo(root: string): Promise<boolean> {
   return (await tryGit(root, ['rev-parse', '--is-inside-work-tree'])) === 'true';

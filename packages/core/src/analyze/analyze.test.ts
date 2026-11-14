@@ -15,11 +15,21 @@ describe('javascript / typescript', () => {
       const f = require('f-pkg');
       const notAnImport = load('./nope');
     `;
-    expect(await specs(source, 'typescript')).toEqual(['./a', '../b', './c', './d', './e', 'f-pkg']);
+    expect(await specs(source, 'typescript')).toEqual([
+      './a',
+      '../b',
+      './c',
+      './d',
+      './e',
+      'f-pkg',
+    ]);
   });
 
   it('parses JSX with the tsx grammar', async () => {
-    const result = await analyzeSource(`import React from 'react';\nexport const A = () => <div />;`, 'tsx');
+    const result = await analyzeSource(
+      `import React from 'react';\nexport const A = () => <div />;`,
+      'tsx',
+    );
     expect(result.imports).toEqual([{ spec: 'react' }]);
     expect(result.functions).toBe(1);
   });
@@ -42,7 +52,13 @@ describe('javascript / typescript', () => {
 describe('python', () => {
   it('collects absolute and relative imports', async () => {
     const result = await analyzeSource(
-      ['import os', 'import a.b as ab', 'from a.b import c, d as e', 'from . import x', 'from ..pkg import y'].join('\n'),
+      [
+        'import os',
+        'import a.b as ab',
+        'from a.b import c, d as e',
+        'from . import x',
+        'from ..pkg import y',
+      ].join('\n'),
       'python',
     );
     expect(result.imports).toEqual([
@@ -55,7 +71,10 @@ describe('python', () => {
   });
 
   it('counts branches', async () => {
-    const result = await analyzeSource('def f(x):\n  if x and x > 1:\n    return 1\n  elif x:\n    return 2\n', 'python');
+    const result = await analyzeSource(
+      'def f(x):\n  if x and x > 1:\n    return 1\n  elif x:\n    return 2\n',
+      'python',
+    );
     // 1 + if + and + elif
     expect(result.complexity).toBe(4);
   });
@@ -63,7 +82,8 @@ describe('python', () => {
 
 describe('go', () => {
   it('collects single and grouped imports', async () => {
-    const source = 'package main\nimport "fmt"\nimport (\n  x "example.com/m/pkg"\n  _ "embed"\n)\n';
+    const source =
+      'package main\nimport "fmt"\nimport (\n  x "example.com/m/pkg"\n  _ "embed"\n)\n';
     expect(await specs(source, 'go')).toEqual(['fmt', 'example.com/m/pkg', 'embed']);
   });
 });

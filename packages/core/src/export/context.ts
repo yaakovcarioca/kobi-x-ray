@@ -7,7 +7,8 @@ export interface ContextOptions {
   maxList?: number;
 }
 
-const day = (seconds: number) => (seconds ? new Date(seconds * 1000).toISOString().slice(0, 10) : 'n/a');
+const day = (seconds: number) =>
+  seconds ? new Date(seconds * 1000).toISOString().slice(0, 10) : 'n/a';
 
 function describe(file: FileNode): string {
   const parts = [`${file.lines} lines`];
@@ -26,7 +27,12 @@ function list(items: string[], max: number, empty: string): string {
 function header(snapshot: Snapshot, title: string): string[] {
   const { repo } = snapshot;
   const ref = [repo.branch, repo.head].filter(Boolean).join(' @ ');
-  return [`# X-Ray context: \`${title}\``, '', `Repository: **${repo.name}**${ref ? ` (${ref})` : ''}`, ''];
+  return [
+    `# X-Ray context: \`${title}\``,
+    '',
+    `Repository: **${repo.name}**${ref ? ` (${ref})` : ''}`,
+    '',
+  ];
 }
 
 /**
@@ -66,10 +72,22 @@ export function fileContextMarkdown(
   }
 
   out.push('', '## Imports (what this file depends on)', '');
-  out.push(list(file.imports.map((id) => describe(files[id]!)), max, 'No internal imports.'));
+  out.push(
+    list(
+      file.imports.map((id) => describe(files[id]!)),
+      max,
+      'No internal imports.',
+    ),
+  );
 
   out.push('', '## Imported by (direct dependents)', '');
-  out.push(list(file.importedBy.map((id) => describe(files[id]!)), max, 'Nothing imports this file.'));
+  out.push(
+    list(
+      file.importedBy.map((id) => describe(files[id]!)),
+      max,
+      'Nothing imports this file.',
+    ),
+  );
 
   const blast = blastRadius(files, fileId);
   out.push('', '## Blast radius', '');
@@ -133,14 +151,18 @@ export function districtContextMarkdown(
     }
   }
   const byCount = (map: Map<number, number>) =>
-    [...map].sort((a, b) => b[1] - a[1]).map(([id, count]) => `\`${files[id]!.path}\` (${count} imports)`);
+    [...map]
+      .sort((a, b) => b[1] - a[1])
+      .map(([id, count]) => `\`${files[id]!.path}\` (${count} imports)`);
 
   const out = header(snapshot, dir === '' ? '/' : `${dir}/`);
   const lines = inside.reduce((sum, file) => sum + file.lines, 0);
   out.push('## Summary', '');
   out.push(`- ${inside.length} files, ${lines} lines`);
   out.push(`- ${internalEdges} imports stay inside the module`);
-  out.push(`- ${outgoing.size} outside files are depended on; ${incoming.size} outside files depend on it`);
+  out.push(
+    `- ${outgoing.size} outside files are depended on; ${incoming.size} outside files depend on it`,
+  );
 
   out.push('', '## Files (largest first)', '');
   const largest = [...inside].sort((a, b) => b.lines - a.lines).map(describe);

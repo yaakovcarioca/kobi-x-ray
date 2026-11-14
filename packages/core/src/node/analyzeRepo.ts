@@ -57,7 +57,10 @@ function addWorkingTree(timeline: Timeline, files: FileNode[], now: number): voi
  * Analyses a directory end to end: scans files, parses the supported
  * languages, resolves imports into a dependency graph and mines git history.
  */
-export async function analyzeRepo(rootDir: string, options: AnalyzeOptions = {}): Promise<Snapshot> {
+export async function analyzeRepo(
+  rootDir: string,
+  options: AnalyzeOptions = {},
+): Promise<Snapshot> {
   const root = resolve(rootDir);
   const maxFileBytes = options.maxFileBytes ?? 1_000_000;
   const maxParseBytes = options.maxParseBytes ?? 400_000;
@@ -141,7 +144,9 @@ export async function analyzeRepo(rootDir: string, options: AnalyzeOptions = {})
 
   progress('history', 0, 1);
   const wantHistory = scan.git && options.history !== false;
-  const timeline: Timeline = wantHistory ? await readTimeline(root) : { paths: [], authors: [], commits: [] };
+  const timeline: Timeline = wantHistory
+    ? await readTimeline(root)
+    : { paths: [], authors: [], commits: [] };
   addWorkingTree(timeline, files, now);
   progress('history', 1, 1);
 

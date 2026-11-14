@@ -8,7 +8,12 @@ const ROOT_DIRS = new Set(['', 'src', 'lib', 'app']);
 
 function moduleFile(index: RepoIndex, base: string | null): string | null {
   if (base === null || base === '') return null;
-  for (const candidate of [`${base}.py`, `${base}/__init__.py`, `${base}.pyi`, `${base}/__init__.pyi`]) {
+  for (const candidate of [
+    `${base}.py`,
+    `${base}/__init__.py`,
+    `${base}.pyi`,
+    `${base}/__init__.pyi`,
+  ]) {
     if (index.files.has(candidate)) return candidate;
   }
   return null;

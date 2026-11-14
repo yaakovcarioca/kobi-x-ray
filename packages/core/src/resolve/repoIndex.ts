@@ -112,7 +112,8 @@ export function buildRepoIndex(paths: string[], configs: ReadonlyMap<string, str
     const dir = dirname(path);
     if (base === 'package.json') {
       const json = parseJsonc(text) as { name?: unknown } | null;
-      if (json && typeof json.name === 'string' && dir !== '') packages.push({ name: json.name, dir });
+      if (json && typeof json.name === 'string' && dir !== '')
+        packages.push({ name: json.name, dir });
     } else if (base === 'go.mod') {
       const match = /^module\s+(\S+)/m.exec(text);
       if (match) goModules.push({ name: match[1]!, dir });
@@ -130,7 +131,15 @@ export function buildRepoIndex(paths: string[], configs: ReadonlyMap<string, str
   goModules.sort((a, b) => b.name.length - a.name.length);
   rustCrates.sort((a, b) => b.dir.length - a.dir.length);
 
-  return { files, byDir, tsconfigs, packages, goModules, rustCrates, pyModules: indexPython(paths) };
+  return {
+    files,
+    byDir,
+    tsconfigs,
+    packages,
+    goModules,
+    rustCrates,
+    pyModules: indexPython(paths),
+  };
 }
 
 /** True when `path` is inside `dir` (the root directory `''` contains everything). */

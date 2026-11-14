@@ -10,7 +10,11 @@ export interface BlastRadius {
   maxDepth: number;
 }
 
-function traverse(files: readonly FileNode[], origin: number, edge: 'imports' | 'importedBy'): BlastRadius {
+function traverse(
+  files: readonly FileNode[],
+  origin: number,
+  edge: 'imports' | 'importedBy',
+): BlastRadius {
   const seen = new Uint8Array(files.length);
   seen[origin] = 1;
   const ids: number[] = [];

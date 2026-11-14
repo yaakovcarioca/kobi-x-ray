@@ -21,7 +21,9 @@ describe('squarify', () => {
 
   it('keeps cells close to square', () => {
     const ratios: number[] = [];
-    squarify(new Array(16).fill(1), 0, 0, 4, 4, (_i, _x, _y, w, h) => ratios.push(Math.max(w / h, h / w)));
+    squarify(new Array(16).fill(1), 0, 0, 4, 4, (_i, _x, _y, w, h) =>
+      ratios.push(Math.max(w / h, h / w)),
+    );
     expect(Math.max(...ratios)).toBeLessThan(1.5);
   });
 
@@ -33,7 +35,14 @@ describe('squarify', () => {
 });
 
 describe('layoutCity', () => {
-  const paths = ['README.md', 'src/a.ts', 'src/b.ts', 'src/ui/x.tsx', 'src/ui/y.tsx', 'test/a.test.ts'];
+  const paths = [
+    'README.md',
+    'src/a.ts',
+    'src/b.ts',
+    'src/ui/x.tsx',
+    'src/ui/y.tsx',
+    'test/a.test.ts',
+  ];
   const layout = layoutCity(paths);
   const lot = (i: number) => ({
     x: layout.lots[i * 4]!,

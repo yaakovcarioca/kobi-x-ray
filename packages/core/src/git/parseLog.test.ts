@@ -6,9 +6,16 @@ const commit = (hash: string, time: number, author: string, subject: string, sta
 
 describe('parseGitLog', () => {
   const raw =
-    commit('a'.repeat(40), 100, 'Ana', 'init', ['10\t0\tsrc/a.ts', '5\t0\tsrc/b.ts', '-\t-\tlogo.png']) +
+    commit('a'.repeat(40), 100, 'Ana', 'init', [
+      '10\t0\tsrc/a.ts',
+      '5\t0\tsrc/b.ts',
+      '-\t-\tlogo.png',
+    ]) +
     commit('b'.repeat(40), 200, 'Bob', 'Merge branch x', []) +
-    commit('c'.repeat(40), 300, 'Ana', 'fix: crash on empty input', ['3\t1\tsrc/a.ts', '900\t0\tpackage-lock.json']) +
+    commit('c'.repeat(40), 300, 'Ana', 'fix: crash on empty input', [
+      '3\t1\tsrc/a.ts',
+      '900\t0\tpackage-lock.json',
+    ]) +
     commit('d'.repeat(40), 400, 'Bob', 'chore: lockfile', ['1\t1\tpackage-lock.json']);
 
   const timeline = parseGitLog(raw);

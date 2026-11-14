@@ -34,8 +34,22 @@ function snapshot(): Snapshot {
       paths: files.map((f) => f.path),
       authors: ['Ana'],
       commits: [
-        { hash: '1', time: 1_700_000_000, author: 0, subject: 'init', fix: false, changes: [0, 100, 0] },
-        { hash: '2', time: 1_700_086_400, author: 0, subject: 'fix auth', fix: true, changes: [0, 4, 2] },
+        {
+          hash: '1',
+          time: 1_700_000_000,
+          author: 0,
+          subject: 'init',
+          fix: false,
+          changes: [0, 100, 0],
+        },
+        {
+          hash: '2',
+          time: 1_700_086_400,
+          author: 0,
+          subject: 'fix auth',
+          fix: true,
+          changes: [0, 4, 2],
+        },
       ],
     },
   };
@@ -54,7 +68,9 @@ describe('fileContextMarkdown', () => {
   });
 
   it('reports the transitive blast radius', () => {
-    expect(markdown).toContain('3 files depend on this file directly or transitively (2 direct, up to 2 hops away).');
+    expect(markdown).toContain(
+      '3 files depend on this file directly or transitively (2 direct, up to 2 hops away).',
+    );
     expect(markdown).toContain('- `src/api/login.ts` (2 hops)');
   });
 

@@ -47,21 +47,78 @@ const IGNORED_FILES = new Set([
 
 const BINARY_EXTENSIONS = new Set([
   // images
-  '.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif', '.ico', '.bmp', '.tiff', '.psd', '.icns',
+  '.png',
+  '.jpg',
+  '.jpeg',
+  '.gif',
+  '.webp',
+  '.avif',
+  '.ico',
+  '.bmp',
+  '.tiff',
+  '.psd',
+  '.icns',
   // fonts
-  '.woff', '.woff2', '.ttf', '.otf', '.eot',
+  '.woff',
+  '.woff2',
+  '.ttf',
+  '.otf',
+  '.eot',
   // media
-  '.mp3', '.mp4', '.mov', '.avi', '.webm', '.wav', '.ogg', '.flac',
+  '.mp3',
+  '.mp4',
+  '.mov',
+  '.avi',
+  '.webm',
+  '.wav',
+  '.ogg',
+  '.flac',
   // archives & binaries
-  '.zip', '.tar', '.gz', '.tgz', '.bz2', '.xz', '.7z', '.rar', '.jar', '.war',
-  '.exe', '.dll', '.so', '.dylib', '.bin', '.o', '.a', '.class', '.pyc', '.wasm',
+  '.zip',
+  '.tar',
+  '.gz',
+  '.tgz',
+  '.bz2',
+  '.xz',
+  '.7z',
+  '.rar',
+  '.jar',
+  '.war',
+  '.exe',
+  '.dll',
+  '.so',
+  '.dylib',
+  '.bin',
+  '.o',
+  '.a',
+  '.class',
+  '.pyc',
+  '.wasm',
   // documents & data blobs
-  '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.sqlite', '.db', '.parquet',
+  '.pdf',
+  '.doc',
+  '.docx',
+  '.xls',
+  '.xlsx',
+  '.ppt',
+  '.pptx',
+  '.sqlite',
+  '.db',
+  '.parquet',
   // generated
-  '.map', '.snap', '.lock',
+  '.map',
+  '.snap',
+  '.lock',
 ]);
 
-const GENERATED_SUFFIXES = ['.min.js', '.min.css', '.min.mjs', '.bundle.js', '.generated.ts', '.pb.go'];
+const GENERATED_SUFFIXES = [
+  '.min.js',
+  '.min.css',
+  '.min.mjs',
+  '.bundle.js',
+  '.generated.ts',
+  '.pb.go',
+];
 
 /** True when a repo-relative POSIX path should be left out of the city. */
 export function shouldIgnore(path: string): boolean {

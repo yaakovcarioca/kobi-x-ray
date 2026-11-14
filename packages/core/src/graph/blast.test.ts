@@ -25,7 +25,13 @@ function graph(count: number, edges: Array<[number, number]>): FileNode[] {
 
 describe('blastRadius', () => {
   // 1 -> 0, 2 -> 0, 3 -> 1, 4 -> 3, 0 -> 5
-  const files = graph(6, [[1, 0], [2, 0], [3, 1], [4, 3], [0, 5]]);
+  const files = graph(6, [
+    [1, 0],
+    [2, 0],
+    [3, 1],
+    [4, 3],
+    [0, 5],
+  ]);
 
   it('walks dependents breadth-first with depths', () => {
     const blast = blastRadius(files, 0);
@@ -40,7 +46,11 @@ describe('blastRadius', () => {
   });
 
   it('terminates on cycles', () => {
-    const cyclic = graph(3, [[0, 1], [1, 2], [2, 0]]);
+    const cyclic = graph(3, [
+      [0, 1],
+      [1, 2],
+      [2, 0],
+    ]);
     expect(blastRadius(cyclic, 0).ids).toEqual([2, 1]);
   });
 
