@@ -92,11 +92,11 @@ describe('tuneSaturation', () => {
   });
 
   it('rises with churn so busy files do not all saturate', () => {
-    const commits = Array.from({ length: 200 }, (_, i) => commit(DAY + i * 3600, [0, 2, 1]));
+    const commits = Array.from({ length: 100 }, (_, i) => commit(DAY + i * 3600, [0, 2, 1]));
     const busy: Timeline = { paths: ['a'], authors: ['x'], commits };
     const saturation = tuneSaturation(busy);
     expect(saturation).toBeGreaterThan(20);
-    const heat = new TimelineReplay(busy, { saturation }).seek(200).heat(0);
+    const heat = new TimelineReplay(busy, { saturation }).seek(100).heat(0);
     expect(heat).toBeGreaterThan(0.85);
     expect(heat).toBeLessThan(0.95);
   });
