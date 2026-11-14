@@ -20,7 +20,7 @@ export function CameraRig({ model }: { model: CityModel }) {
   useEffect(() => {
     // About 1.75 city widths away: the diagonal fits a 42° field of view.
     // Portrait viewports see less horizontally, so they step further back.
-    const fit = Math.max(1, 1.2 / aspect);
+    const fit = Math.max(1, 0.96 / aspect);
     camera.position.set(side * 0.95 * fit, (side * 0.85 + 4) * fit, side * 1.2 * fit);
     controls.current?.target.set(0, 0, 0);
     controls.current?.update();
