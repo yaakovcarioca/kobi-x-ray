@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kobi X-Ray card</title>
+    <style>
+      :root {
+        --bg: #0b0e13;
+        --surface: #11161d;
+        --line: #2f3b4b;
+        --text: #e9eef4;
+        --muted: #95a2b3;
+        --faint: #5f6c7d;
+        --warm: #e9a23b;
+        --hot: #e5484d;
+        --cold: #4a5a6c;
+        --font: 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
+        --mono: 'Cascadia Code', Consolas, ui-monospace, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        overflow: hidden;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        height: 100%;
+        padding: 64px 64px 56px;
+        /* Lot grid fading towards the bottom, like the city's ground plan. */
+        background-image:
+          linear-gradient(180deg, transparent 30%, var(--bg) 78%),
+          linear-gradient(#18202b 1px, transparent 1px),
+          linear-gradient(90deg, #18202b 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          60px 60px,
+          60px 60px;
+      }
+
+      header,
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .mark {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        height: 28px;
+      }
+
+      .mark i {
+        width: 8px;
+        height: 14px;
+        background: var(--cold);
+      }
+
+      .mark i:nth-child(2) {
+        height: 28px;
+        background: var(--hot);
+      }
+
+      .mark i:nth-child(3) {
+        height: 20px;
+        background: var(--warm);
+      }
+
+      .kicker {
+        font-family: var(--mono);
+        font-size: 24px;
+        color: var(--warm);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 76px;
+        font-weight: 600;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+      }
+
+      .sub {
+        margin: 20px 0 0;
+        max-width: 880px;
+        font-size: 32px;
+        line-height: 1.35;
+        color: var(--muted);
+        text-wrap: pretty;
+      }
+
+      .body {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .frame {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border: 2px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface);
+      }
+
+      .frame img,
+      .strip img {
+        position: absolute;
+        max-width: none;
+      }
+
+      svg.leaders {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .note {
+        position: absolute;
+        padding: 10px 18px;
+        background: #f1f4f8;
+        color: #0b0e13;
+        border-radius: 999px;
+        font-size: 25px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .strips {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .strip {
+        position: relative;
+        overflow: hidden;
+        border: 2px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+      }
+
+      .strip-label {
+        position: absolute;
+        left: 20px;
+        top: 18px;
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        padding: 8px 18px;
+        background: rgb(11 14 19 / 88%);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+
+      .strip-label b {
+        font-size: 30px;
+      }
+
+      .strip-label span {
+        font-family: var(--mono);
+        font-size: 20px;
+        color: var(--muted);
+      }
+
+      pre {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        padding: 36px 40px;
+        border: 2px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface);
+        font-family: var(--mono);
+        font-size: 25px;
+        line-height: 1.52;
+        color: var(--muted);
+        white-space: pre-wrap;
+      }
+
+      pre b {
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      ol {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 2px solid var(--line);
+      }
+
+      ol li {
+        display: grid;
+        grid-template-columns: 56px 190px 1fr;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 2px solid var(--line);
+        font-size: 28px;
+        color: var(--muted);
+      }
+
+      ol li span:first-child {
+        font-family: var(--mono);
+        font-size: 22px;
+        color: var(--faint);
+      }
+
+      ol li b {
+        font-size: 36px;
+        color: var(--text);
+      }
+
+      .command {
+        padding: 12px 22px;
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        font-family: var(--mono);
+        font-size: 28px;
+      }
+
+      .command i {
+        font-style: normal;
+        color: var(--warm);
+      }
+
+      .meta {
+        font-size: 24px;
+        color: var(--faint);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="card"></div>
+    <script type="module">
+      import { CARDS } from './cards.js';
+
+      const id = new URLSearchParams(location.search).get('id');
+      const index = Math.max(
+        0,
+        CARDS.findIndex((card) => card.id === id),
+      );
+      const card = CARDS[index];
+      const escape = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+      /** Positions an image so that the `crop` region fills the box width. */
+      const cropped = (image, crop) =>
+        `<img src="../out/raw/${image}.png" alt="" style="width:${100 / crop.w}%;left:${(-crop.x / crop.w) * 100}%;top:0;transform:translateY(${-crop.y * 100}%)" />`;
+
+      let body = '';
+      if (card.media) {
+        const notes = card.media.notes ?? [];
+        body = `<div class="frame">${cropped(card.media.image, card.media.crop)}
+          <svg class="leaders" viewBox="0 0 100 100" preserveAspectRatio="none">
+            ${notes.map((n) => `<line x1="${n.lx + 3}" y1="${n.ly + 2}" x2="${n.px}" y2="${n.py}" stroke="#f1f4f8" stroke-width="2" vector-effect="non-scaling-stroke" /><circle cx="${n.px}" cy="${n.py}" r="0.01" stroke="#f1f4f8" stroke-width="14" stroke-linecap="round" vector-effect="non-scaling-stroke" />`).join('')}
+          </svg>
+          ${notes.map((n) => `<span class="note" style="left:${n.lx}%;top:${n.ly}%">${escape(n.text)}</span>`).join('')}
+        </div>`;
+      } else if (card.strips) {
+        body = `<div class="strips">${card.strips
+          .map(
+            (strip) =>
+              `<div class="strip">${cropped(strip.image, strip.crop)}<div class="strip-label"><b>${strip.label}</b><span>${strip.detail}</span></div></div>`,
+          )
+          .join('')}</div>`;
+      } else if (card.code) {
+        body = `<pre>${card.code
+          .map((line) => (line.startsWith('#') ? `<b>${escape(line)}</b>` : escape(line)))
+          .join('\n')}</pre>`;
+      } else if (card.steps) {
+        body = `<ol>${card.steps
+          .map(([name, text], i) => `<li><span>0${i + 1}</span><b>${name}</b>${escape(text)}</li>`)
+          .join('')}</ol>`;
+      }
+
+      document.getElementById('card').innerHTML = `
+        <header>
+          <div class="brand"><span class="mark"><i></i><i></i><i></i></span>Kobi X-Ray</div>
+          <span class="meta">${index + 1} / ${CARDS.length}</span>
+        </header>
+        <div>
+          <div class="kicker">${escape(card.kicker)}</div>
+          <h1>${escape(card.title)}</h1>
+          <p class="sub">${escape(card.sub)}</p>
+        </div>
+        <div class="body">${body}</div>
+        <footer>
+          <span class="command"><i>$</i> npx kobi-xray</span>
+          <span class="meta">open source · roda local</span>
+        </footer>`;
+      document.title = card.id;
+      window.cardReady = Promise.all(
+        [...document.images].map((image) => image.decode().catch(() => {})),
+      ).then(() => document.fonts.ready);
+    </script>
+  </body>
+</html>
