@@ -13,7 +13,7 @@ export { resolveImport, type Resolution } from './resolve/resolve.js';
 export { blastRadius, dependencyCone, type BlastRadius } from './graph/blast.js';
 export { rankHotspots, riskScore, type Hotspot } from './graph/hotspots.js';
 export { parseGitLog, looksLikeFix, GIT_LOG_ARGS } from './git/parseLog.js';
-export { TimelineReplay, type ReplayOptions } from './timeline/replay.js';
+export { TimelineReplay, tuneSaturation, type ReplayOptions } from './timeline/replay.js';
 export { fileHistory, indexPaths, type FileHistory } from './timeline/history.js';
 export { squarify } from './layout/squarify.js';
 export { layoutCity, type CityLayout, type District, type LayoutOptions } from './layout/city.js';
