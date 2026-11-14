@@ -1,0 +1,108 @@
+.empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 24px;
+  /* Faint lot grid, echoing the city's ground plan. */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center;
+}
+
+.empty.is-dragging {
+  outline: 2px dashed var(--imports);
+  outline-offset: -12px;
+}
+
+.empty-card {
+  width: min(520px, 100%);
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+}
+
+.empty-card h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.empty-lead {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.empty-steps {
+  display: grid;
+  gap: 14px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.empty-steps li {
+  display: grid;
+  gap: 6px;
+}
+
+.empty-steps code {
+  padding: 9px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 13px;
+  user-select: all;
+}
+
+.empty-open {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.empty-open:hover {
+  background: #fff;
+}
+
+.empty-open input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.empty-open:focus-within {
+  outline: 2px solid var(--imports);
+  outline-offset: 2px;
+}
+
+.empty-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.empty-error {
+  margin: 16px 0 0;
+  padding: 9px 12px;
+  border: 1px solid rgb(229 72 77 / 45%);
+  border-radius: var(--radius);
+  background: rgb(229 72 77 / 10%);
+  color: #f1868a;
+}
+
+.loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--text-muted);
+}
