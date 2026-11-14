@@ -48,15 +48,25 @@ try {
   await shoot(page, 'city-heat');
 
   // Time travel: three moments of the same city.
+  const moments = [];
   for (const [name, share] of [
-    ['time-1', 0.06],
-    ['time-2', 0.35],
+    ['time-1', 0.15],
+    ['time-2', 0.45],
     ['time-3', 1],
   ]) {
     await store(page, 'setPosition', Math.round(facts.commits * share));
     await settle(page);
     await shoot(page, name);
+    // What the top bar and timeline say at this moment, for captions.
+    moments.push(
+      await page.evaluate(() => ({
+        commit: window.kobiXray.store.getState().commitIndex,
+        date: document.querySelector('.timeline-date')?.textContent ?? '',
+        size: document.querySelector('.topbar-stats')?.textContent ?? '',
+      })),
+    );
   }
+  writeFileSync(join(OUT, 'facts.json'), JSON.stringify({ ...facts, moments }, null, 2));
 
   // The riskiest file at HEAD, with its arcs and X-Ray panel.
   const hottest = await page.evaluate(() =>
