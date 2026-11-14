@@ -25,6 +25,8 @@ interface State {
   /** Selected district (directory path). */
   district: string | null;
   colorMode: ColorMode;
+  /** Camera slowly orbits the city on its own (demos, recordings). */
+  cinematic: boolean;
 
   load(snapshot: Snapshot): void;
   fail(message: string | null): void;
@@ -37,6 +39,7 @@ interface State {
   selectDistrict(dir: string | null): void;
   hover(path: number | null): void;
   setColorMode(mode: ColorMode): void;
+  setCinematic(on: boolean): void;
 }
 
 export const useStore = create<State>((set, get) => ({
@@ -51,6 +54,7 @@ export const useStore = create<State>((set, get) => ({
   hovered: null,
   district: null,
   colorMode: 'heat',
+  cinematic: new URLSearchParams(globalThis.location?.search ?? '').has('cinematic'),
 
   load(snapshot) {
     const model = buildCityModel(snapshot);
@@ -118,5 +122,9 @@ export const useStore = create<State>((set, get) => ({
 
   setColorMode(colorMode) {
     set({ colorMode });
+  },
+
+  setCinematic(cinematic) {
+    set({ cinematic });
   },
 }));
