@@ -31,6 +31,7 @@ Drag the timeline, or press <kbd>Space</kbd>, to watch the city grow commit by c
 | <kbd>Space</kbd>          | Play / pause                                       |
 | <kbd>←</kbd> <kbd>→</kbd> | Previous / next commit (<kbd>Shift</kbd> jumps 10) |
 | <kbd>/</kbd>              | Find a file                                        |
+| <kbd>C</kbd>              | Cinematic mode: the camera orbits on its own       |
 | <kbd>Esc</kbd>            | Clear the selection                                |
 
 ### X-Ray panel
