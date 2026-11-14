@@ -12,14 +12,19 @@ export function CameraRig({ model }: { model: CityModel }) {
   const goal = useRef<THREE.Vector3 | null>(null);
   const selected = useStore((s) => s.selected);
   const district = useStore((s) => s.district);
+  const cinematic = useStore((s) => s.cinematic);
+  const aspect = useThree((state) => state.size.width / state.size.height);
   const side = model.layout.width;
 
   // Frame the whole city whenever a new snapshot loads.
   useEffect(() => {
     // About 1.75 city widths away: the diagonal fits a 42° field of view.
-    camera.position.set(side * 0.95, side * 0.85 + 4, side * 1.2);
+    // Portrait viewports see less horizontally, so they step further back.
+    const fit = Math.max(1, 1.2 / aspect);
+    camera.position.set(side * 0.95 * fit, (side * 0.85 + 4) * fit, side * 1.2 * fit);
     controls.current?.target.set(0, 0, 0);
     controls.current?.update();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- reframing on resize would fight the user
   }, [camera, side]);
 
   useEffect(() => {
@@ -51,6 +56,8 @@ export function CameraRig({ model }: { model: CityModel }) {
       ref={controls}
       makeDefault
       enableDamping
+      autoRotate={cinematic}
+      autoRotateSpeed={1.4}
       dampingFactor={0.12}
       maxPolarAngle={Math.PI / 2 - 0.05}
       minDistance={2}
