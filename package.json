@@ -14,6 +14,8 @@
   },
   "scripts": {
     "build": "npm run build -w @kobi-xray/core && npm run build -w @kobi-xray/web && npm run build -w kobi-xray",
+    "dev": "npm run dev -w @kobi-xray/web",
+    "start": "node packages/cli/dist/bin.js",
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "format": "prettier --write ."
