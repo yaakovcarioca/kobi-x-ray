@@ -78,13 +78,17 @@ export class TimelineReplay {
     return this;
   }
 
-  /** 0..1 temperature of a path at the current position. */
-  heat(path: number): number {
+  /** Churn score of a path decayed to the current position (unbounded). */
+  churn(path: number): number {
     const last = this.lastTouch[path]!;
     if (last === 0) return 0;
     const age = Math.max(0, this.time - last);
-    const current = this.score[path]! * Math.pow(0.5, age / this.halfLife);
-    return 1 - Math.exp(-current / this.saturation);
+    return this.score[path]! * Math.pow(0.5, age / this.halfLife);
+  }
+
+  /** 0..1 temperature of a path at the current position. */
+  heat(path: number): number {
+    return 1 - Math.exp(-this.churn(path) / this.saturation);
   }
 
   private step(): void {
@@ -136,4 +140,22 @@ export class TimelineReplay {
     this.fixes.set(checkpoint.fixes);
     this.index = checkpoint.index;
   }
+}
+
+/**
+ * Picks a heat saturation that suits the repository: the busiest ~2% of files
+ * at HEAD end up around 90% heat, so a sleepy repo and a frantic one both use
+ * the whole colour ramp.
+ */
+export function tuneSaturation(timeline: Timeline, options: ReplayOptions = {}): number {
+  const replay = new TimelineReplay(timeline, options).seek(timeline.commits.length);
+  const scores: number[] = [];
+  for (let path = 0; path < timeline.paths.length; path++) {
+    if (replay.lines[path]! > 0) scores.push(replay.churn(path));
+  }
+  if (scores.length === 0) return 3;
+  scores.sort((a, b) => a - b);
+  const busy = scores[Math.floor(0.98 * (scores.length - 1))]!;
+  // 1 - exp(-2.3) is roughly 0.9.
+  return Math.min(60, Math.max(3, busy / 2.3));
 }
