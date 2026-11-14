@@ -1,0 +1,21 @@
+{
+  "name": "kobi-xray-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Codebase Time-Travel & Architecture X-Ray",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build -w @kobi-xray/core && npm run build -w @kobi-xray/web && npm run build -w kobi-xray",
+    "test": "vitest run",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "format": "prettier --write ."
+  }
+}
