@@ -1,0 +1,99 @@
+:root {
+  --bg: #0b0e13;
+  --surface: #11161d;
+  --surface-raised: #171d26;
+  --line: #222b37;
+  --line-strong: #2f3b4b;
+  --text: #dbe2ea;
+  --text-muted: #8492a3;
+  --text-faint: #5a6677;
+
+  /* Semantic colours shared with the 3D scene. */
+  --imports: #4c9dff;
+  --dependents: #f08c3a;
+  --hot: #e5484d;
+  --warm: #e9a23b;
+  --cold: #4a5a6c;
+
+  --font-ui: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+
+  --radius: 6px;
+  --bar-height: 44px;
+  --timeline-height: 84px;
+  --panel-width: 340px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--imports);
+  outline-offset: 2px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.app {
+  position: relative;
+  height: 100%;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+}
+
+/* Thin scrollbars inside panels. */
+.scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}
