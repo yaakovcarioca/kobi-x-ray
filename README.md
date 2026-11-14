@@ -10,15 +10,15 @@ Run it inside a repository and the city opens in your browser. Everything is com
 
 ## Reading the city
 
-| What you see | What it means |
-| --- | --- |
-| Building | One file |
-| District (platform) | One directory; nested directories stack like terraces |
-| Height | Lines of code |
-| Width | Fan-in: how many files import it |
-| Colour (Heat mode) | Recent churn, with bug-fix commits weighted double. It cools down with a 90-day half-life |
-| Blue arcs | Files the selected file imports |
-| Orange arcs | Files that import the selected file |
+| What you see        | What it means                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| Building            | One file                                                                                  |
+| District (platform) | One directory; nested directories stack like terraces                                     |
+| Height              | Lines of code                                                                             |
+| Width               | Fan-in: how many files import it                                                          |
+| Colour (Heat mode)  | Recent churn, with bug-fix commits weighted double. It cools down with a 90-day half-life |
+| Blue arcs           | Files the selected file imports                                                           |
+| Orange arcs         | Files that import the selected file                                                       |
 
 Tall, wide and red is the combination to worry about: a large file that many others depend on and that keeps changing.
 
@@ -26,12 +26,12 @@ Tall, wide and red is the combination to worry about: a large file that many oth
 
 Drag the timeline, or press <kbd>Space</kbd>, to watch the city grow commit by commit. The strip behind the slider shows how many lines changed over time; the red part is the share coming from bug fixes.
 
-| Key | Action |
-| --- | --- |
-| <kbd>Space</kbd> | Play / pause |
+| Key                       | Action                                             |
+| ------------------------- | -------------------------------------------------- |
+| <kbd>Space</kbd>          | Play / pause                                       |
 | <kbd>←</kbd> <kbd>→</kbd> | Previous / next commit (<kbd>Shift</kbd> jumps 10) |
-| <kbd>/</kbd> | Find a file |
-| <kbd>Esc</kbd> | Clear the selection |
+| <kbd>/</kbd>              | Find a file                                        |
+| <kbd>Esc</kbd>            | Clear the selection                                |
 
 ### X-Ray panel
 
@@ -54,12 +54,12 @@ A snapshot written with `--json` can be opened later by dropping it on the viewe
 
 Imports, function counts and cyclomatic complexity come from [tree-sitter](https://tree-sitter.github.io/) grammars compiled to WebAssembly.
 
-| Language | Import resolution |
-| --- | --- |
-| TypeScript / JavaScript | Relative paths, `tsconfig` `paths` and `baseUrl`, workspace packages |
-| Python | Absolute and relative imports, packages |
-| Go | Module-local packages via `go.mod` |
-| Rust | `mod` declarations, `crate::` / `super::` / `self::` paths, workspace crates |
+| Language                | Import resolution                                                            |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| TypeScript / JavaScript | Relative paths, `tsconfig` `paths` and `baseUrl`, workspace packages         |
+| Python                  | Absolute and relative imports, packages                                      |
+| Go                      | Module-local packages via `go.mod`                                           |
+| Rust                    | `mod` declarations, `crate::` / `super::` / `self::` paths, workspace crates |
 
 Every other text file still gets a building (height and heat), just no dependency edges.
 
