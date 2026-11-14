@@ -31,7 +31,7 @@ const READ_BATCH = 48;
  *
  * Untracked files get one synthetic commit at the end. Tracked files whose
  * replayed line count drifted to zero (changes made inside merge commits are
- * not part of ) are corrected in the last real commit
+ * not part of `git log --numstat`) are corrected in the last real commit
  * instead, so a clean clone never shows phantom uncommitted work.
  */
 function addWorkingTree(timeline: Timeline, files: FileNode[], now: number): void {
