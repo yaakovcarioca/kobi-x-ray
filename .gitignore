@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+*.tsbuildinfo
+packages/cli/web/
+
+# generated snapshots
+*.xray.json
+
+# tooling
+coverage/
+.vite/
+.claude/
+
+# env & OS
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
