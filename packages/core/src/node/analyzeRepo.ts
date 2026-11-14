@@ -26,22 +26,35 @@ export interface AnalyzeOptions {
 
 const READ_BATCH = 48;
 
-/** Adds one synthetic commit for files the git history does not account for. */
+/**
+ * Reconciles the replayed history with what is actually on disk.
+ *
+ * Untracked files get one synthetic commit at the end. Tracked files whose
+ * replayed line count drifted to zero (changes made inside merge commits are
+ * not part of ) are corrected in the last real commit
+ * instead, so a clean clone never shows phantom uncommitted work.
+ */
 function addWorkingTree(timeline: Timeline, files: FileNode[], now: number): void {
   const index = indexPaths(timeline);
   const replay = new TimelineReplay(timeline).seek(timeline.commits.length);
-  const changes: number[] = [];
+  const untracked: number[] = [];
+  const drifted: number[] = [];
   for (const file of files) {
     if (file.lines === 0) continue;
-    let path = index.get(file.path);
-    if (path !== undefined && replay.lines[path]! > 0) continue;
-    if (path === undefined) {
-      path = timeline.paths.length;
+    const known = index.get(file.path);
+    if (known === undefined) {
+      untracked.push(timeline.paths.length, file.lines, 0);
       timeline.paths.push(file.path);
+    } else if (replay.lines[known]! <= 0) {
+      drifted.push(known, file.lines, 0);
     }
-    changes.push(path, file.lines, 0);
   }
-  if (changes.length === 0) return;
+
+  const last = timeline.commits[timeline.commits.length - 1];
+  if (last) last.changes.push(...drifted);
+  else untracked.push(...drifted);
+
+  if (untracked.length === 0) return;
   timeline.authors.push('working tree');
   timeline.commits.push({
     hash: 'worktree',
@@ -49,7 +62,7 @@ function addWorkingTree(timeline: Timeline, files: FileNode[], now: number): voi
     author: timeline.authors.length - 1,
     subject: timeline.commits.length === 0 ? 'Files on disk' : 'Uncommitted files',
     fix: false,
-    changes,
+    changes: untracked,
   });
 }
 
