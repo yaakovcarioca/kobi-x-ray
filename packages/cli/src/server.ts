@@ -30,7 +30,11 @@ function send(res: ServerResponse, status: number, type: string, body: Buffer | 
  * Serves the built web viewer plus the snapshot at `/api/snapshot`. Listens on
  * loopback only: the snapshot describes private source code.
  */
-export async function startServer(webDir: string, snapshotJson: string, port: number): Promise<ViewerServer> {
+export async function startServer(
+  webDir: string,
+  snapshotJson: string,
+  port: number,
+): Promise<ViewerServer> {
   const gzipped = gzipSync(snapshotJson);
 
   const server = createServer(async (req, res) => {

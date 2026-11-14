@@ -8,7 +8,9 @@ const source = join(here, '..', '..', '..', 'apps', 'web', 'dist');
 const target = join(here, '..', 'web');
 
 if (!existsSync(source)) {
-  console.error('apps/web/dist not found. Build the web app first: npm run build -w @kobi-xray/web');
+  console.error(
+    'apps/web/dist not found. Build the web app first: npm run build -w @kobi-xray/web',
+  );
   process.exit(1);
 }
 rmSync(target, { recursive: true, force: true });

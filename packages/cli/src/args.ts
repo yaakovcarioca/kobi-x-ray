@@ -67,7 +67,8 @@ export function parseArgs(argv: readonly string[]): CliOptions {
       case '-p':
       case '--port': {
         const port = Number(value());
-        if (!Number.isInteger(port) || port < 1 || port > 65535) throw new UsageError('Invalid port');
+        if (!Number.isInteger(port) || port < 1 || port > 65535)
+          throw new UsageError('Invalid port');
         options.port = port;
         break;
       }

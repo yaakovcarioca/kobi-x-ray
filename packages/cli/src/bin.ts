@@ -12,7 +12,9 @@ import { startServer } from './server.js';
 const here = dirname(fileURLToPath(import.meta.url));
 
 function version(): string {
-  const pkg = JSON.parse(readFileSync(join(here, '..', 'package.json'), 'utf8')) as { version: string };
+  const pkg = JSON.parse(readFileSync(join(here, '..', 'package.json'), 'utf8')) as {
+    version: string;
+  };
   return pkg.version;
 }
 
@@ -68,6 +70,8 @@ main().catch((error: unknown) => {
     process.stderr.write(`${error.message}\n\n${USAGE}`);
     process.exit(2);
   }
-  process.stderr.write(`\n${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`);
+  process.stderr.write(
+    `\n${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`,
+  );
   process.exit(1);
 });
