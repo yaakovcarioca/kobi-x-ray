@@ -7,7 +7,9 @@ export default defineConfig({
   resolve: {
     alias: {
       // Consume the core straight from source: no build step while developing.
-      '@kobi-xray/core': fileURLToPath(new URL('../../packages/core/src/index.ts', import.meta.url)),
+      '@kobi-xray/core': fileURLToPath(
+        new URL('../../packages/core/src/index.ts', import.meta.url),
+      ),
     },
   },
   server: {

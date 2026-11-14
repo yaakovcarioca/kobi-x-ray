@@ -20,7 +20,15 @@ function Stat({ label, value, hint }: { label: string; value: string; hint?: str
 }
 
 /** Clickable list of related files, collapsed to a preview when long. */
-function FileList({ model, paths, tone }: { model: CityModel; paths: number[]; tone: 'imports' | 'dependents' }) {
+function FileList({
+  model,
+  paths,
+  tone,
+}: {
+  model: CityModel;
+  paths: number[];
+  tone: 'imports' | 'dependents';
+}) {
   const [expanded, setExpanded] = useState(false);
   const shown = expanded ? paths : paths.slice(0, PREVIEW);
   return (
@@ -59,7 +67,11 @@ function FileList({ model, paths, tone }: { model: CityModel; paths: number[]; t
 /** Stacked bar: how many files break at each hop away from the selection. */
 function BlastBar({ byDepth, total }: { byDepth: number[]; total: number }) {
   return (
-    <div className="blast-bar" role="img" aria-label={byDepth.map((n, i) => `${n} at ${i + 1} hops`).join(', ')}>
+    <div
+      className="blast-bar"
+      role="img"
+      aria-label={byDepth.map((n, i) => `${n} at ${i + 1} hops`).join(', ')}
+    >
       {byDepth.map((count, depth) => (
         <span
           key={depth}
@@ -72,7 +84,15 @@ function BlastBar({ byDepth, total }: { byDepth: number[]; total: number }) {
   );
 }
 
-export function XRayPanel({ model, path, relations }: { model: CityModel; path: number; relations: Relations }) {
+export function XRayPanel({
+  model,
+  path,
+  relations,
+}: {
+  model: CityModel;
+  path: number;
+  relations: Relations;
+}) {
   const commitIndex = useStore((s) => s.commitIndex);
   const file = model.files[model.fileOfPath[path]!];
   const fullPath = model.paths[path]!;
@@ -99,17 +119,28 @@ export function XRayPanel({ model, path, relations }: { model: CityModel; path: 
           <h2 className="mono">{name}</h2>
           <p className="mono panel-dir">{dir || './'}</p>
         </div>
-        <button type="button" className="icon-button" onClick={() => useStore.getState().select(null)} aria-label="Close">
+        <button
+          type="button"
+          className="icon-button"
+          onClick={() => useStore.getState().select(null)}
+          aria-label="Close"
+        >
           <CloseIcon />
         </button>
       </header>
 
       {!exists && (
         <p className="panel-note">
-          {visible.length === 0 ? 'This file has not been created yet at this point in history.' : 'This file was deleted before this point in history.'}
+          {visible.length === 0
+            ? 'This file has not been created yet at this point in history.'
+            : 'This file was deleted before this point in history.'}
         </p>
       )}
-      {exists && !file && <p className="panel-note">This file no longer exists at HEAD, so only its history is known.</p>}
+      {exists && !file && (
+        <p className="panel-note">
+          This file no longer exists at HEAD, so only its history is known.
+        </p>
+      )}
 
       <section className="panel-section">
         <div className="heat-row">
@@ -122,10 +153,18 @@ export function XRayPanel({ model, path, relations }: { model: CityModel; path: 
         <dl className="stats">
           <Stat label="Lines" value={formatNumber(lines)} hint="At the playhead" />
           <Stat label="Commits" value={formatNumber(visible.length)} hint="Up to the playhead" />
-          <Stat label="Bug fixes" value={formatNumber(model.replay.fixes[path]!)} hint="Commits whose subject looks like a fix" />
+          <Stat
+            label="Bug fixes"
+            value={formatNumber(model.replay.fixes[path]!)}
+            hint="Commits whose subject looks like a fix"
+          />
           {file && (
             <>
-              <Stat label="Complexity" value={file.complexity ? formatNumber(file.complexity) : '—'} hint="Cyclomatic, whole file" />
+              <Stat
+                label="Complexity"
+                value={file.complexity ? formatNumber(file.complexity) : '—'}
+                hint="Cyclomatic, whole file"
+              />
               <Stat label="Functions" value={formatNumber(file.functions)} />
               <Stat label="Language" value={file.language} />
             </>
@@ -141,16 +180,20 @@ export function XRayPanel({ model, path, relations }: { model: CityModel; path: 
               <strong className="num">{formatNumber(relations.blast)}</strong>
               <span>
                 {relations.blast === 1 ? 'file' : 'files'} can break if this changes
-                {relations.blastByDepth.length > 1 && `, up to ${relations.blastByDepth.length} hops away`}
+                {relations.blastByDepth.length > 1 &&
+                  `, up to ${relations.blastByDepth.length} hops away`}
               </span>
             </p>
             <BlastBar byDepth={relations.blastByDepth} total={relations.blast} />
-            {!atHead && <p className="panel-footnote">Dependencies are shown as they are at HEAD.</p>}
+            {!atHead && (
+              <p className="panel-footnote">Dependencies are shown as they are at HEAD.</p>
+            )}
           </section>
 
           <section className="panel-section">
             <h3>
-              Imported by <span className="num count">{formatNumber(relations.dependents.length)}</span>
+              Imported by{' '}
+              <span className="num count">{formatNumber(relations.dependents.length)}</span>
             </h3>
             {relations.dependents.length ? (
               <FileList model={model} paths={relations.dependents} tone="dependents" />
@@ -202,7 +245,9 @@ export function XRayPanel({ model, path, relations }: { model: CityModel; path: 
                       onClick={() => useStore.getState().step(index + 1 - commitIndex)}
                     >
                       <span className="num commit-date">{formatDate(commit.time)}</span>
-                      <span className={`commit-subject${commit.fix ? ' is-fix' : ''}`}>{commit.subject}</span>
+                      <span className={`commit-subject${commit.fix ? ' is-fix' : ''}`}>
+                        {commit.subject}
+                      </span>
                     </button>
                   </li>
                 );

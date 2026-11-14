@@ -27,7 +27,11 @@ export function CopyContextButton({ build, label }: { build: () => string; label
     <button type="button" className="copy-context" onClick={copy}>
       {state === 'copied' ? <CheckIcon /> : <CopyIcon />}
       <span aria-live="polite">
-        {state === 'copied' ? 'Copied to clipboard' : state === 'failed' ? 'Clipboard blocked by the browser' : label}
+        {state === 'copied'
+          ? 'Copied to clipboard'
+          : state === 'failed'
+            ? 'Clipboard blocked by the browser'
+            : label}
       </span>
     </button>
   );

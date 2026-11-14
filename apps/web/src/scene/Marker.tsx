@@ -5,7 +5,15 @@ import type { CityModel } from '../model/cityModel';
 import { live } from './live';
 
 /** Wireframe outline hugging one building, following its animated height. */
-export function Marker({ model, path, color }: { model: CityModel; path: number | null; color: string }) {
+export function Marker({
+  model,
+  path,
+  color,
+}: {
+  model: CityModel;
+  path: number | null;
+  color: string;
+}) {
   const outline = useRef<THREE.LineSegments>(null);
   const geometry = useMemo(() => {
     const box = new THREE.BoxGeometry(1, 1, 1);

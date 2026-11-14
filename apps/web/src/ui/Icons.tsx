@@ -48,7 +48,14 @@ export const CopyIcon = () => (
 );
 
 export const CheckIcon = () => (
-  <svg {...base} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    {...base}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="m3 8.5 3.2 3.2L13 4.8" />
   </svg>
 );

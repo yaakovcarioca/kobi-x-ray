@@ -22,7 +22,12 @@ export function Hotspots({ model }: { model: CityModel }) {
 
   return (
     <section className="hotspots" aria-label="Hotspots">
-      <button type="button" className="hotspots-toggle" aria-expanded={open} onClick={() => setOpen(!open)}>
+      <button
+        type="button"
+        className="hotspots-toggle"
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
+      >
         <span>Hotspots</span>
         <span className="hotspots-chevron" aria-hidden>
           {open ? '–' : '+'}
@@ -30,7 +35,9 @@ export function Hotspots({ model }: { model: CityModel }) {
       </button>
       {open && (
         <ol className="hotspots-list">
-          {ranked.length === 0 && <li className="hotspots-empty">Nothing is hot at this point in history.</li>}
+          {ranked.length === 0 && (
+            <li className="hotspots-empty">Nothing is hot at this point in history.</li>
+          )}
           {ranked.map((hotspot, i) => {
             const path = model.pathOfFile[hotspot.id]!;
             const { dir, name } = splitPath(model.files[hotspot.id]!.path);
@@ -49,7 +56,9 @@ export function Hotspots({ model }: { model: CityModel }) {
                     <span className="mono hotspot-dir">{dir || './'}</span>
                   </span>
                   <span className="mini-heat">
-                    <span style={{ clipPath: `inset(0 ${100 - Math.round(hotspot.heat * 100)}% 0 0)` }} />
+                    <span
+                      style={{ clipPath: `inset(0 ${100 - Math.round(hotspot.heat * 100)}% 0 0)` }}
+                    />
                   </span>
                 </button>
               </li>

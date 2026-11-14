@@ -30,7 +30,8 @@ export function App() {
         else useStore.getState().fail(null);
       },
       (error: unknown) => {
-        if (!cancelled) useStore.getState().fail(error instanceof Error ? error.message : String(error));
+        if (!cancelled)
+          useStore.getState().fail(error instanceof Error ? error.message : String(error));
       },
     );
     return () => {
@@ -47,7 +48,9 @@ export function App() {
       <TopBar model={model} />
       <Hotspots model={model} />
       <Legend />
-      {selected !== null && relations && <XRayPanel key={selected} model={model} path={selected} relations={relations} />}
+      {selected !== null && relations && (
+        <XRayPanel key={selected} model={model} path={selected} relations={relations} />
+      )}
       {district !== null && <DistrictPanel key={district} model={model} dir={district} />}
       <Timeline model={model} />
       <Tooltip model={model} />

@@ -5,7 +5,8 @@
   padding: 24px;
   /* Faint lot grid, echoing the city's ground plan. */
   background-image:
-    linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: center;
 }

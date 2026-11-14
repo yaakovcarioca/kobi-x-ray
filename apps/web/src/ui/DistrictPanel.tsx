@@ -29,7 +29,11 @@ export function DistrictPanel({ model, dir }: { model: CityModel; dir: string })
     return summary.inside
       .map((file) => {
         const path = model.pathOfFile[file.id]!;
-        return { path, heat: path >= 0 ? model.replay.heat(path) : 0, lines: path >= 0 ? model.replay.lines[path]! : 0 };
+        return {
+          path,
+          heat: path >= 0 ? model.replay.heat(path) : 0,
+          lines: path >= 0 ? model.replay.lines[path]! : 0,
+        };
       })
       .filter((entry) => entry.path >= 0 && entry.lines > 0)
       .sort((a, b) => b.heat - a.heat || b.lines - a.lines);
@@ -46,7 +50,12 @@ export function DistrictPanel({ model, dir }: { model: CityModel; dir: string })
           <h2 className="mono">{name}/</h2>
           <p className="mono panel-dir">{parent || './'}</p>
         </div>
-        <button type="button" className="icon-button" onClick={() => useStore.getState().selectDistrict(null)} aria-label="Close">
+        <button
+          type="button"
+          className="icon-button"
+          onClick={() => useStore.getState().selectDistrict(null)}
+          aria-label="Close"
+        >
           <CloseIcon />
         </button>
       </header>
@@ -74,15 +83,25 @@ export function DistrictPanel({ model, dir }: { model: CityModel; dir: string })
 
       <section className="panel-section">
         <h3>Hottest files</h3>
-        {ranked.length === 0 && <p className="panel-empty">No files here at this point in history.</p>}
+        {ranked.length === 0 && (
+          <p className="panel-empty">No files here at this point in history.</p>
+        )}
         <ul className="file-list">
           {ranked.slice(0, 12).map((entry) => (
             <li key={entry.path}>
-              <button type="button" className="file-row mono" onClick={() => useStore.getState().select(entry.path)}>
+              <button
+                type="button"
+                className="file-row mono"
+                onClick={() => useStore.getState().select(entry.path)}
+              >
                 <span className="mini-heat">
-                  <span style={{ clipPath: `inset(0 ${100 - Math.round(entry.heat * 100)}% 0 0)` }} />
+                  <span
+                    style={{ clipPath: `inset(0 ${100 - Math.round(entry.heat * 100)}% 0 0)` }}
+                  />
                 </span>
-                <span className="file-row-path">{model.paths[entry.path]!.slice(dir.length + 1)}</span>
+                <span className="file-row-path">
+                  {model.paths[entry.path]!.slice(dir.length + 1)}
+                </span>
               </button>
             </li>
           ))}

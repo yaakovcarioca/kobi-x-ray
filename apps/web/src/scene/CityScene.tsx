@@ -34,8 +34,16 @@ export function CityScene({ model }: { model: CityModel }) {
 
       {/* Cool sky fill plus a warm key light so faces read as distinct planes. */}
       <hemisphereLight args={['#c9d6e8', '#232a35', 1.5]} />
-      <directionalLight position={[side * 0.6, side * 1.2 + 10, side * 0.35]} intensity={2.1} color="#fff1dd" />
-      <directionalLight position={[-side, side * 0.5, -side * 0.7]} intensity={0.5} color="#9db7dd" />
+      <directionalLight
+        position={[side * 0.6, side * 1.2 + 10, side * 0.35]}
+        intensity={2.1}
+        color="#fff1dd"
+      />
+      <directionalLight
+        position={[-side, side * 0.5, -side * 0.7]}
+        intensity={0.5}
+        color="#9db7dd"
+      />
 
       <mesh rotation-x={-Math.PI / 2} position-y={-0.01}>
         <planeGeometry args={[side * 40 + 400, side * 40 + 400]} />

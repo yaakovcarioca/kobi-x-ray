@@ -13,7 +13,9 @@ export function EmptyState() {
     try {
       useStore.getState().load(parseSnapshot(await file.text()));
     } catch (cause) {
-      useStore.getState().fail(cause instanceof Error ? cause.message : 'Could not read that file.');
+      useStore
+        .getState()
+        .fail(cause instanceof Error ? cause.message : 'Could not read that file.');
     }
   };
 
@@ -35,7 +37,10 @@ export function EmptyState() {
     >
       <div className="empty-card">
         <h1>Kobi X-Ray</h1>
-        <p className="empty-lead">See a repository as a city: files are buildings, folders are districts, and the timeline replays every commit.</p>
+        <p className="empty-lead">
+          See a repository as a city: files are buildings, folders are districts, and the timeline
+          replays every commit.
+        </p>
 
         <ol className="empty-steps">
           <li>
@@ -49,10 +54,16 @@ export function EmptyState() {
         </ol>
 
         <label className="empty-open">
-          <input type="file" accept="application/json,.json" onChange={(event) => void open(event.target.files?.[0])} />
+          <input
+            type="file"
+            accept="application/json,.json"
+            onChange={(event) => void open(event.target.files?.[0])}
+          />
           Open a snapshot file
         </label>
-        <p className="empty-hint">or drop it anywhere on this page. Nothing is uploaded: the file is read in your browser.</p>
+        <p className="empty-hint">
+          or drop it anywhere on this page. Nothing is uploaded: the file is read in your browser.
+        </p>
         {error && (
           <p className="empty-error" role="alert">
             {error}

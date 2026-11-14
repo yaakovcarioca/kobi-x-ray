@@ -19,7 +19,10 @@ function search(model: CityModel, query: string): number[] {
     hits.push({ path: model.pathOfFile[file.id]!, score: (inName ? 0 : 1000) + lower.length });
   }
   hits.sort((a, b) => a.score - b.score);
-  return hits.slice(0, MAX_RESULTS).map((hit) => hit.path).filter((path) => path >= 0);
+  return hits
+    .slice(0, MAX_RESULTS)
+    .map((hit) => hit.path)
+    .filter((path) => path >= 0);
 }
 
 export function Search({ model }: { model: CityModel }) {
@@ -65,7 +68,8 @@ export function Search({ model }: { model: CityModel }) {
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         onKeyDown={(event) => {
-          if (event.key === 'ArrowDown') setActive((value) => Math.min(value + 1, results.length - 1));
+          if (event.key === 'ArrowDown')
+            setActive((value) => Math.min(value + 1, results.length - 1));
           else if (event.key === 'ArrowUp') setActive((value) => Math.max(value - 1, 0));
           else if (event.key === 'Enter' && results[active] !== undefined) choose(results[active]!);
           else if (event.key === 'Escape') input.current?.blur();
@@ -76,7 +80,9 @@ export function Search({ model }: { model: CityModel }) {
       <kbd className="search-hint">/</kbd>
       {open && query.trim().length >= 2 && (
         <ul className="search-results" role="listbox">
-          {results.length === 0 && <li className="search-empty">No file matches “{query.trim()}”.</li>}
+          {results.length === 0 && (
+            <li className="search-empty">No file matches “{query.trim()}”.</li>
+          )}
           {results.map((path, i) => {
             const { dir, name } = splitPath(model.paths[path]!);
             return (

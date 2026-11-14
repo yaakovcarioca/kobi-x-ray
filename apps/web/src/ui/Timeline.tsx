@@ -69,16 +69,36 @@ export function Timeline({ model }: { model: CityModel }) {
   return (
     <footer className="timeline">
       <div className="timeline-controls">
-        <button type="button" className="icon-button" onClick={() => step(-1)} aria-label="Previous commit">
+        <button
+          type="button"
+          className="icon-button"
+          onClick={() => step(-1)}
+          aria-label="Previous commit"
+        >
           <StepIcon back />
         </button>
-        <button type="button" className="play-button" onClick={togglePlay} aria-label={playing ? 'Pause' : 'Play history'}>
+        <button
+          type="button"
+          className="play-button"
+          onClick={togglePlay}
+          aria-label={playing ? 'Pause' : 'Play history'}
+        >
           {playing ? <PauseIcon /> : <PlayIcon />}
         </button>
-        <button type="button" className="icon-button" onClick={() => step(1)} aria-label="Next commit">
+        <button
+          type="button"
+          className="icon-button"
+          onClick={() => step(1)}
+          aria-label="Next commit"
+        >
           <StepIcon />
         </button>
-        <button type="button" className="speed-button num" onClick={cycleSpeed} aria-label="Playback speed">
+        <button
+          type="button"
+          className="speed-button num"
+          onClick={cycleSpeed}
+          aria-label="Playback speed"
+        >
           {speed}×
         </button>
       </div>
@@ -95,7 +115,9 @@ export function Timeline({ model }: { model: CityModel }) {
             step={1}
             value={commitIndex}
             aria-label="Commit"
-            aria-valuetext={commit ? `${formatDate(commit.time)}: ${commit.subject}` : 'Before the first commit'}
+            aria-valuetext={
+              commit ? `${formatDate(commit.time)}: ${commit.subject}` : 'Before the first commit'
+            }
             onChange={(event) => {
               useStore.setState({ playing: false });
               setPosition(Number(event.target.value));
@@ -111,10 +133,15 @@ export function Timeline({ model }: { model: CityModel }) {
             <>
               <span className="timeline-date">{formatDate(commit.time)}</span>
               <span className="mono timeline-hash">{commit.hash.slice(0, 7)}</span>
-              <span className={`timeline-subject${commit.fix ? ' is-fix' : ''}`} title={commit.subject}>
+              <span
+                className={`timeline-subject${commit.fix ? ' is-fix' : ''}`}
+                title={commit.subject}
+              >
                 {commit.subject}
               </span>
-              <span className="timeline-author">{model.snapshot.timeline.authors[commit.author]}</span>
+              <span className="timeline-author">
+                {model.snapshot.timeline.authors[commit.author]}
+              </span>
             </>
           ) : (
             <span className="timeline-subject">Before the first commit</span>

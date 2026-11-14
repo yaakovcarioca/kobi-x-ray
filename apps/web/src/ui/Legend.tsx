@@ -21,7 +21,9 @@ export function Legend() {
       ) : (
         <div className="legend-ramp">
           <span>{colorMode === 'heat' ? 'cold' : 'simple'}</span>
-          <i style={{ background: rampCss(colorMode === 'heat' ? HEAT_STOPS : COMPLEXITY_STOPS) }} />
+          <i
+            style={{ background: rampCss(colorMode === 'heat' ? HEAT_STOPS : COMPLEXITY_STOPS) }}
+          />
           <span>{colorMode === 'heat' ? 'recent churn + fixes' : 'complex'}</span>
         </div>
       )}
