@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useStore } from './store';
 
-/** Space plays, arrows step through commits, Escape clears the selection. */
+/** Space plays, arrows step through commits, C toggles the cinematic orbit, Escape clears the selection. */
 export function useHotkeys(): void {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -22,6 +22,9 @@ export function useHotkeys(): void {
           break;
         case 'ArrowRight':
           store.step(event.shiftKey ? 10 : 1);
+          break;
+        case 'c':
+          store.setCinematic(!store.cinematic);
           break;
         case 'Escape':
           store.select(null);
