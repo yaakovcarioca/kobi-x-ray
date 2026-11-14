@@ -1,0 +1,32 @@
+{
+  "name": "kobi-xray",
+  "version": "0.1.0",
+  "description": "Turn any Git repository into a navigable 3D city with time travel",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "kobi-xray": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "web"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "codebase",
+    "visualization",
+    "architecture",
+    "git",
+    "tree-sitter",
+    "code-city"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-web.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@kobi-xray/core": "0.1.0"
+  }
+}
