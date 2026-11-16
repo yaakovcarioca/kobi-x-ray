@@ -21,7 +21,8 @@
     "format": "prettier --write .",
     "marketing:shots": "node marketing/shots.mjs",
     "marketing:cards": "node marketing/cards.mjs",
-    "marketing:video": "node marketing/video.mjs"
+    "marketing:video": "node marketing/video.mjs",
+    "marketing:og": "node marketing/og.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
