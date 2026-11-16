@@ -2,7 +2,7 @@
 
 Sete posts, um por dia. As imagens e o vídeo ficam em `marketing/out/` depois de rodar os scripts (veja o [README](README.md)). Todos os números são do repositório `vitejs/vite`, medidos pela própria ferramenta.
 
-> Antes de publicar: os posts dizem `npx kobi-xray`. Isso só funciona depois que o pacote estiver no npm e o repositório estiver público. Troque `LINK` pelo endereço do GitHub ou da landing page.
+> Os posts dizem `npx kobi-xray`, que funciona agora que o pacote está no npm. Os links apontam para a landing page; o código está em https://github.com/yaakovcarioca/kobi-x-ray.
 
 ---
 
@@ -25,7 +25,7 @@ Chama Kobi X-Ray. É open source, roda na sua máquina e nenhum código sai dela
 
 `npx kobi-xray` dentro de qualquer repositório.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #opensource #git #softwarearchitecture #devtools #buildinpublic
 
@@ -50,7 +50,7 @@ Alto, largo e vermelho ao mesmo tempo? É ali que mora o risco.
 
 Na imagem, o Vite. O bairro vermelho é `packages/vite/src/node`.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #softwarearchitecture #techdebt #devtools
 
@@ -73,7 +73,7 @@ Dá para ver bairros nascendo, um arquivo crescendo sem controle até virar um a
 
 É a forma mais rápida que encontrei de entender como um projeto chegou onde está.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #git #softwareengineering #buildinpublic
 
@@ -94,7 +94,7 @@ No Kobi X-Ray você clica no prédio e os arcos acendem: laranja para quem depen
 
 Qual é o `utils.ts` do seu projeto?
 
-LINK
+https://xray.yaakovcarioca.com
 
 #softwarearchitecture #refactoring #devtools
 
@@ -116,7 +116,7 @@ O Kobi X-Ray cruza três sinais para ranquear esses arquivos:
 
 O ranking é ao vivo: arraste a linha do tempo e veja quem era o problema dois anos atrás.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #techdebt #engineeringmanagement #devtools
 
@@ -140,7 +140,7 @@ No Kobi X-Ray, um clique em "Copy context for Claude / Cursor" copia um briefing
 
 Cola no Claude Code ou no Cursor e pede o refactor.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #ai #claudecode #cursor #devtools
 
@@ -164,6 +164,6 @@ Sem servidor, sem upload, sem IA no caminho. Funciona com TypeScript, JavaScript
 
 O código é aberto. Se testar no seu projeto, me manda o print da sua cidade.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #opensource #threejs #treesitter #buildinpublic
