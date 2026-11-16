@@ -21,3 +21,5 @@ npm run marketing:video -- city.json --lang en # → marketing/out/kobi-xray-lau
 The scripts need Chrome or Edge installed (set `CHROME_PATH` if it is somewhere unusual). Output goes to `marketing/out/`, which is not committed.
 
 Numbers quoted in the cards and posts come from the snapshot used to render them. After re-rendering on another repository, update `cards/cards.js`, `cards/cards.en.js` and the posts from `marketing/out/facts.json`.
+
+The landing page lives in its own repository (`kobi-x-ray-landingpage`). Its screenshots are the PNGs from `marketing/out/raw`, converted to WebP.
