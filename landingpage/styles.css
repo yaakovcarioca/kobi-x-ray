@@ -246,13 +246,6 @@ button {
   border-color: var(--text-muted);
 }
 
-.button.is-disabled {
-  color: var(--text-faint);
-  border-color: var(--line);
-  cursor: default;
-  pointer-events: none;
-}
-
 /* ---------- Hero ---------- */
 
 .hero {
@@ -948,72 +941,6 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-muted);
 }
 
-/* ---------- Pricing ---------- */
-
-.plans {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.plan {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 24px;
-  padding: 28px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.plan-live {
-  border-color: var(--text-muted);
-}
-
-.plan header {
-  display: grid;
-  gap: 6px;
-}
-
-.plan h3 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.soon {
-  padding: 2px 8px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
-.price {
-  font-size: 40px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.price small {
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0;
-  color: var(--text-muted);
-}
-
-.plan-for {
-  font-size: 15px;
-  color: var(--text-muted);
-}
-
-.plan:not(.plan-live) .ticks {
-  color: var(--text-muted);
-}
-
 /* ---------- Roadmap ---------- */
 
 .roadmap {
@@ -1124,8 +1051,7 @@ input[type='range']::-moz-range-thumb {
     order: 0;
   }
 
-  .pains,
-  .plans {
+  .pains {
     grid-template-columns: 1fr;
   }
 
