@@ -6,6 +6,8 @@
 npx kobi-xray
 ```
 
+Website: https://xray.yaakovcarioca.com
+
 Run it inside a repository and the city opens in your browser. Everything is computed locally; no code leaves your machine.
 
 ## Reading the city
