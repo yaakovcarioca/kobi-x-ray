@@ -265,9 +265,13 @@
   <body>
     <div class="card" id="card"></div>
     <script type="module">
-      import { CARDS } from './cards.js';
+      const params = new URLSearchParams(location.search);
+      const lang = params.get('lang') === 'en' ? 'en' : 'pt';
+      document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+      const { CARDS, FOOTER } = await import(lang === 'en' ? './cards.en.js' : './cards.js');
+      const footer = FOOTER ?? 'open source · roda local';
 
-      const id = new URLSearchParams(location.search).get('id');
+      const id = params.get('id');
       const index = Math.max(
         0,
         CARDS.findIndex((card) => card.id === id),
@@ -318,7 +322,7 @@
         <div class="body">${body}</div>
         <footer>
           <span class="command"><i>$</i> npx kobi-xray</span>
-          <span class="meta">open source · roda local</span>
+          <span class="meta">${escape(footer)}</span>
         </footer>`;
       document.title = card.id;
       window.cardReady = Promise.all(
