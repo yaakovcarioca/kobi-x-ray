@@ -8,6 +8,7 @@ node packages/cli/dist/bin.js <repo> --json city.json
 npm run marketing:shots -- city.json           # raw screenshots  → marketing/out/raw
 npm run marketing:cards                        # 7 post images     → marketing/out/posts
 npm run marketing:video -- city.json           # launch video      → marketing/out/*.mp4
+npm run marketing:og                           # 1200×630 social preview → marketing/out/og.png
 
 # English edition (same visuals, English copy)
 npm run marketing:cards -- --lang en           # → marketing/out/posts-en
