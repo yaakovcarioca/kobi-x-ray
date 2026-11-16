@@ -37,7 +37,7 @@
     "@kobi-xray/core": "0.1.0",
     "esbuild": "^0.28.2"
   },
-  "homepage": "https://github.com/yaakovcarioca/kobi-x-ray#readme",
+  "homepage": "https://xray.yaakovcarioca.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yaakovcarioca/kobi-x-ray.git",
