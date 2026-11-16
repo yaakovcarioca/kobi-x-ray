@@ -1,7 +1,7 @@
 {
   "name": "kobi-xray",
   "version": "0.1.0",
-  "description": "Turn any Git repository into a navigable 3D city with time travel",
+  "description": "Turn any Git repository into a navigable 3D city with time travel. Runs locally.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -9,7 +9,9 @@
   },
   "files": [
     "dist",
-    "web"
+    "web",
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=20"
@@ -23,10 +25,28 @@
     "code-city"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && node scripts/copy-web.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "tsc -p tsconfig.json --noEmit && node scripts/bundle.mjs && node scripts/copy-web.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@kobi-xray/core": "0.1.0"
+    "tree-sitter-wasms": "^0.1.13",
+    "web-tree-sitter": "^0.22.6"
+  },
+  "devDependencies": {
+    "@kobi-xray/core": "0.1.0",
+    "esbuild": "^0.28.2"
+  },
+  "homepage": "https://github.com/yaakovcarioca/kobi-x-ray#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaakovcarioca/kobi-x-ray.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/yaakovcarioca/kobi-x-ray/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
