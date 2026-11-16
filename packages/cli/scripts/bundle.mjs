@@ -11,8 +11,9 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 rmSync(join(root, 'dist'), { recursive: true, force: true });
 
 await build({
-  entryPoints: [join(root, 'src', 'bin.ts')],
-  outfile: join(root, 'dist', 'bin.js'),
+  // server.js is a second entry so the marketing scripts can serve a snapshot.
+  entryPoints: [join(root, 'src', 'bin.ts'), join(root, 'src', 'server.ts')],
+  outdir: join(root, 'dist'),
   bundle: true,
   platform: 'node',
   format: 'esm',
