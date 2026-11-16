@@ -2,7 +2,7 @@
 
 Seven posts, one per day. Images and video land in `marketing/out/` after running the scripts (see the [README](README.md)). Every number comes from the `vitejs/vite` repository, measured by the tool itself.
 
-> Before posting: the copy says `npx kobi-xray`. That only works once the package is on npm and the repository is public. Replace `LINK` with the GitHub or landing page URL.
+> Before posting: the copy says `npx kobi-xray`, which works now that the package is on npm. Links point to the landing page; the code is at https://github.com/yaakovcarioca/kobi-x-ray.
 
 ---
 
@@ -25,7 +25,7 @@ It's called Kobi X-Ray. Open source, runs on your machine, no code ever leaves i
 
 `npx kobi-xray` inside any repository.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #opensource #git #softwarearchitecture #devtools #buildinpublic
 
@@ -50,7 +50,7 @@ Tall, wide and red at the same time? That's where the risk lives.
 
 In the image, Vite. The red district is `packages/vite/src/node`.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #softwarearchitecture #techdebt #devtools
 
@@ -73,7 +73,7 @@ You can see districts being born, one file growing out of control into a red sky
 
 It's the fastest way I've found to understand how a project got where it is.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #git #softwareengineering #buildinpublic
 
@@ -94,7 +94,7 @@ In Kobi X-Ray you click the building and the arcs light up: orange for what depe
 
 What's the `utils.ts` of your project?
 
-LINK
+https://xray.yaakovcarioca.com
 
 #softwarearchitecture #refactoring #devtools
 
@@ -116,7 +116,7 @@ Kobi X-Ray crosses three signals to rank them:
 
 The ranking is live: drag the timeline and see who the problem was two years ago.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #techdebt #engineeringmanagement #devtools
 
@@ -140,7 +140,7 @@ It's deterministic: it comes from the dependency graph and Git, without spending
 
 Paste it into Claude Code or Cursor and ask for the refactor.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #ai #claudecode #cursor #devtools
 
@@ -164,6 +164,6 @@ No server, no upload, no AI in the path. Works with TypeScript, JavaScript, Pyth
 
 The code is open. If you try it on your project, send me a screenshot of your city.
 
-LINK
+https://xray.yaakovcarioca.com
 
 #opensource #threejs #treesitter #buildinpublic
