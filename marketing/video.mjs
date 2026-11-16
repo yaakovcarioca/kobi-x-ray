@@ -13,6 +13,35 @@ if (!snapshotPath) {
   process.exit(1);
 }
 
+// `--lang en` renders the English cut (kobi-xray-launch-en.mp4).
+const langIndex = process.argv.indexOf('--lang');
+const english = langIndex > 0 && process.argv[langIndex + 1] === 'en';
+const COPY = {
+  pt: {
+    captions: [
+      'Isto é o repositório do Vite.',
+      'Cada arquivo é um prédio. Cada commit, um passo no tempo.',
+      'Altura: linhas de código. Cor: onde o código mais muda.',
+      'Clique em um arquivo e veja tudo o que pode quebrar.',
+    ],
+    tagline: 'Raio-X 3D com máquina do tempo para repositórios Git',
+    footer: 'open source · roda na sua máquina',
+    file: 'kobi-xray-lancamento.mp4',
+  },
+  en: {
+    captions: [
+      'This is the Vite repository.',
+      'Every file is a building. Every commit, a step in time.',
+      'Height: lines of code. Colour: where the code changes most.',
+      'Click a file and see everything that can break.',
+    ],
+    tagline: '3D X-ray with time travel for Git repositories',
+    footer: 'open source · runs on your machine',
+    file: 'kobi-xray-launch-en.mp4',
+  },
+};
+const copy = english ? COPY.en : COPY.pt;
+
 const FPS = 30;
 const seconds = (value) => Math.round(value * FPS);
 
@@ -24,21 +53,21 @@ const SCENES = {
   outro: [seconds(28), seconds(32)],
 };
 const CAPTIONS = [
-  { from: 0, to: seconds(3), text: 'Isto é o repositório do Vite.' },
+  { from: 0, to: seconds(3), text: copy.captions[0] },
   {
     from: seconds(3.4),
     to: seconds(11),
-    text: 'Cada arquivo é um prédio. Cada commit, um passo no tempo.',
+    text: copy.captions[1],
   },
   {
     from: seconds(11.4),
     to: seconds(20),
-    text: 'Altura: linhas de código. Cor: onde o código mais muda.',
+    text: copy.captions[2],
   },
   {
     from: seconds(20.4),
     to: seconds(28),
-    text: 'Clique em um arquivo e veja tudo o que pode quebrar.',
+    text: copy.captions[3],
   },
 ];
 const TOTAL = SCENES.outro[1];
@@ -78,7 +107,7 @@ const OVERLAY_CSS = `
 const viewer = await serveSnapshot(snapshotPath);
 const browser = await launch();
 mkdirSync(OUT, { recursive: true });
-const output = join(OUT, 'kobi-xray-lancamento.mp4');
+const output = join(OUT, copy.file);
 
 const ffmpeg = spawn(
   ffmpegPath,
@@ -123,18 +152,18 @@ try {
     '?cinematic',
   );
   await page.addStyleTag({ content: OVERLAY_CSS });
-  await page.evaluate(() => {
+  await page.evaluate((tagline, footer) => {
     const caption = document.createElement('div');
     caption.className = 'promo-caption';
     const outro = document.createElement('div');
     outro.className = 'promo-outro';
     outro.innerHTML =
       '<span class="promo-mark"><i></i><i></i><i></i></span><h1>Kobi X-Ray</h1>' +
-      '<p>Raio-X 3D com máquina do tempo para repositórios Git</p>' +
-      '<code><b>$</b> npx kobi-xray</code><p>open source · roda na sua máquina</p>';
+      `<p>${tagline}</p>` +
+      `<code><b>$</b> npx kobi-xray</code><p>${footer}</p>`;
     document.body.append(caption, outro);
     window.__promo = { caption, outro };
-  });
+  }, copy.tagline, copy.footer);
 
   const commits = await page.evaluate(() => window.kobiXray.store.getState().model.commitCount);
   // The riskiest file at HEAD is the star of the X-Ray scene.
